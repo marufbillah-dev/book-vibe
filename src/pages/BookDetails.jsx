@@ -1,5 +1,21 @@
+import { useLoaderData, useParams } from "react-router";
+
 const BookDetails = () => {
-  const tags = ["Fiction", "Romance"];
+  const { bookParamsId } = useParams();
+  const books = useLoaderData();
+
+  const {
+    bookName,
+    author,
+    image,
+    review,
+    totalPages,
+    rating,
+    category,
+    tags,
+    publisher,
+    yearOfPublishing,
+  } = books.find((book) => book.bookId == bookParamsId);
 
   return (
     <section className=" min-h-screen pt-26 px-4">
@@ -8,8 +24,8 @@ const BookDetails = () => {
           {/* Left Column: Image Container */}
           <div className="bg-content/5 rounded-3xl p-12 md:p-20 flex justify-center items-center">
             <img
-              src={"https://i.ibb.co.com/khHN7Pk/9780143454212.jpg"}
-              alt={"The Catcher in the Rye"}
+              src={image}
+              alt={bookName}
               className="w-full max-w-100 drop-shadow-2xl transform transition-transform hover:scale-105 duration-500"
             />
           </div>
@@ -22,7 +38,7 @@ const BookDetails = () => {
                 {"The Catcher in the Rye"}
               </h1>
               <p className="text-xl font-medium text-content/80 font-work-sans">
-                By : {"Awlad Hossain"}
+                By : {author}
               </p>
             </div>
 
@@ -30,7 +46,7 @@ const BookDetails = () => {
 
             {/* Category */}
             <p className="text-xl font-medium text-content/80 font-work-sans">
-              {"Classic"}
+              {category}
             </p>
 
             <div className="my-6 border-t border-gray-100" />
@@ -39,9 +55,7 @@ const BookDetails = () => {
             <div className="font-work-sans">
               <p className="text-content/70 leading-relaxed">
                 <span className="font-bold text-content">Review : </span>
-                {
-                  "Sit amet consectetur. Interdum porta pulvinar non sit aliquam. Aenean pulvinar blandit vel non enim elementum penatibus pellentesque ac. Nec accumsan euismod nulla adipiscing lectus. Morbi elementum a auctor erat diam tellus. Fermentum faucibus nulla enim ornare. Id neque neque pretium enim platea urna non dictum. Faucibus dignissim ridiculus nibh tristique massa non."
-                }
+                {review}
               </p>
             </div>
 
@@ -66,21 +80,21 @@ const BookDetails = () => {
             <div className="space-y-3 font-work-sans max-w-sm">
               <div className="flex justify-between">
                 <span className="text-content/70">Number of Pages:</span>
-                <span className="font-bold text-content">{"281"}</span>
+                <span className="font-bold text-content">{totalPages}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-content/70">Publisher:</span>
-                <span className="font-bold text-content">
-                  {"J.B Lippincott & Co."}
-                </span>
+                <span className="font-bold text-content">{publisher}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-content/70">Year of Publishing:</span>
-                <span className="font-bold text-content">{"1960"}</span>
+                <span className="font-bold text-content">
+                  {yearOfPublishing}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-content/70">Rating:</span>
-                <span className="font-bold text-content">{"5.00"}</span>
+                <span className="font-bold text-content">{rating}</span>
               </div>
             </div>
 
