@@ -3,38 +3,40 @@ import { Link } from "react-router";
 
 const NoReadBooks = ({ message }) => {
   return (
-    <section className="container mx-auto px-4 py-10 mt-20">
-      {/* Chart Title Container - Matching the design reference */}
-      <div className="bg-content/5 rounded-2xl py-8 mb-8 border border-gray-100">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-content font-playfair-display">
-          Pages to Read Chart
-        </h1>
-      </div>
-
-      {/* Main Empty State Content */}
-      <div className="bg-content/3 rounded-[2.5rem] border border-gray-100 min-h-125 flex flex-col items-center justify-center text-center p-8 md:p-12">
-        {/* Decorative Circle Icon */}
-        <div className="w-24 h-24 bg-content/5 rounded-full flex items-center justify-center mb-8 border border-gray-100">
-          <BarChart3 className="w-12 h-12 text-content/40" />
+    <section className="px-4 pt-24 pb-16 bg-gray-50/30 min-h-screen">
+      <div className="lg:container mx-auto space-y-6">
+        {/* Page Title */}
+        <div className="text-center py-8 bg-white rounded-2xl border border-gray-100 shadow-sm">
+          <h2 className="text-3xl md:text-4xl font-bold font-playfair-display text-content">
+            Pages to Read
+          </h2>
+          <p className="text-content/50 font-work-sans text-sm mt-2">
+            Your reading progress at a glance
+          </p>
         </div>
 
-        {/* Text and Title */}
-        <h2 className="text-3xl font-bold font-playfair-display text-content mb-4">
-          Chart Unavailable
-        </h2>
+        {/* Empty State */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center p-10 md:p-16 min-h-80">
+          <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-5 border border-gray-100">
+            <BarChart3 className="w-8 h-8 text-content/30" />
+          </div>
 
-        <p className="text-xl text-content/70 font-work-sans max-w-xl mb-12 leading-relaxed">
-          {message ||
-            "We can only generate a 'Pages to Read' chart after you've marked books as 'Read' on your shelf. Start your reading journey to see your progress visualized!"}
-        </p>
+          <h3 className="text-2xl font-bold font-playfair-display text-content mb-3">
+            Chart Unavailable
+          </h3>
 
-        {/* Action Button - Go to Listed Books (where they can add to 'Read') */}
-        <Link
-          to="/listed-books"
-          className="px-10 py-4 bg-green hover:bg-green-hover text-white rounded-xl font-bold text-lg transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-green/20"
-        >
-          View My Book List
-        </Link>
+          <p className="text-content/50 font-work-sans text-sm max-w-md mb-8 leading-relaxed">
+            {message ||
+              "We can only generate a 'Pages to Read' chart after you've marked books as 'Read' on your shelf. Start your reading journey to see your progress visualized!"}
+          </p>
+
+          <Link
+            to="/listed-books"
+            className="px-7 py-3 bg-green hover:bg-green-hover text-white rounded-lg font-bold text-sm transition-all duration-200 hover:shadow-md hover:shadow-green/20 active:scale-95"
+          >
+            View My Book List
+          </Link>
+        </div>
       </div>
     </section>
   );

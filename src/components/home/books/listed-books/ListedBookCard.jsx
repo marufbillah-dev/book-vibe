@@ -14,65 +14,67 @@ const ListedBookCard = ({ book }) => {
   } = book;
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-6 border border-gray-200 rounded-2xl bg-white">
+    <div className="flex flex-col md:flex-row gap-5 p-5 border border-gray-100 rounded-xl bg-white hover:border-gray-200 hover:shadow-md transition-all duration-200">
       {/* Left: Image */}
-      <div className="bg-[#F3F3F3] rounded-2xl p-8 flex items-center justify-center min-w-57.5">
+      <div className="bg-gray-50 rounded-xl p-6 flex items-center justify-center min-w-48 shrink-0">
         <img
           src={image}
           alt={bookName}
-          className="h-44 object-contain shadow-lg"
+          className="h-36 object-contain"
         />
       </div>
 
       {/* Right: Content */}
-      <div className="flex-1 space-y-4">
-        <h2 className="text-2xl font-bold font-playfair-display text-content">
-          {bookName}
-        </h2>
-        <p className="font-medium text-content/80 font-work-sans">
-          By : {author}
-        </p>
+      <div className="flex-1 space-y-3 min-w-0">
+        <div>
+          <h2 className="text-xl font-bold font-playfair-display text-content leading-snug">
+            {bookName}
+          </h2>
+          <p className="text-sm font-medium text-content/60 font-work-sans mt-1">
+            By {author}
+          </p>
+        </div>
 
         {/* Tags and Year */}
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-content">Tag</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-content/40 uppercase tracking-wider">Tags</span>
             {tags.map((tag, i) => (
               <span
                 key={i}
-                className="px-4 py-1 bg-green/5 text-green rounded-full text-sm font-medium"
+                className="px-3 py-0.5 bg-green/8 text-green rounded-full text-xs font-medium"
               >
                 #{tag}
               </span>
             ))}
           </div>
-          <div className="flex items-center gap-2 text-content/70">
-            <MapPin className="w-4 h-4" />
-            <span>Year of Publishing: {yearOfPublishing}</span>
+          <div className="flex items-center gap-1.5 text-content/50 text-xs font-work-sans">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>{yearOfPublishing}</span>
           </div>
         </div>
 
         {/* Publisher and Pages */}
-        <div className="flex flex-wrap gap-6 text-content/60 border-b border-gray-100 pb-4">
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4" />
-            <span>Publisher: {publisher}</span>
+        <div className="flex flex-wrap gap-4 text-content/50 text-xs border-b border-gray-100 pb-3 font-work-sans">
+          <div className="flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5" />
+            <span>{publisher}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <FileText className="w-4 h-4" />
-            <span>Page {totalPages}</span>
+          <div className="flex items-center gap-1.5">
+            <FileText className="w-3.5 h-3.5" />
+            <span>{totalPages} pages</span>
           </div>
         </div>
 
         {/* Badges and Action */}
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          <span className="px-5 py-2 bg-[#328EFF]/10 text-[#328EFF] rounded-full text-sm font-medium">
-            Category: {category}
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <span className="px-3 py-1 bg-blue-50 text-blue-500 rounded-full text-xs font-semibold">
+            {category}
           </span>
-          <span className="px-5 py-2 bg-[#FFAC33]/10 text-[#FFAC33] rounded-full text-sm font-medium">
-            Rating: {rating}
+          <span className="px-3 py-1 bg-amber-50 text-amber-500 rounded-full text-xs font-semibold">
+            ★ {rating}
           </span>
-          <button className="px-5 py-2 bg-green hover:bg-green-hover text-white rounded-full text-sm font-medium transition-colors">
+          <button className="px-4 py-1.5 bg-green hover:bg-green-hover text-white rounded-full text-xs font-semibold transition-all duration-200 hover:shadow-md hover:shadow-green/20 active:scale-95 ml-auto">
             View Details
           </button>
         </div>

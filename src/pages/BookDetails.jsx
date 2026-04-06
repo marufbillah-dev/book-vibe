@@ -45,96 +45,101 @@ const BookDetails = () => {
   };
 
   return (
-    <section className=" min-h-screen pt-26 px-4">
+    <section className="min-h-screen pt-24 pb-16 px-4 bg-gray-50/30">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
           {/* Left Column: Image Container */}
-          <div className="bg-content/5 rounded-3xl p-12 md:p-20 flex justify-center items-center">
+          <div className="bg-linear-to-br from-gray-50 to-gray-100/80 rounded-2xl p-10 md:p-16 flex justify-center items-center">
             <img
               src={image}
               alt={bookName}
-              className="w-full max-w-100 drop-shadow-2xl transform transition-transform hover:scale-105 duration-500"
+              className="w-full max-w-72 drop-shadow-2xl transform transition-transform hover:scale-[1.03] duration-500"
             />
           </div>
 
           {/* Right Column: Details */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
             {/* Title and Author */}
-            <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold font-playfair-display text-content">
-                {"The Catcher in the Rye"}
-              </h1>
-              <p className="text-xl font-medium text-content/80 font-work-sans">
-                By : {author}
-              </p>
-            </div>
-
-            <div className="my-6 border-t border-gray-100" />
-
-            {/* Category */}
-            <p className="text-xl font-medium text-content/80 font-work-sans">
-              {category}
-            </p>
-
-            <div className="my-6 border-t border-gray-100" />
-
-            {/* Review Section */}
-            <div className="font-work-sans">
-              <p className="text-content/70 leading-relaxed">
-                <span className="font-bold text-content">Review : </span>
-                {review}
-              </p>
-            </div>
-
-            {/* Tags */}
-            <div className="flex items-center gap-4 mt-6">
-              <span className="font-bold text-content font-work-sans">Tag</span>
-              <div className="flex gap-3">
+            <div className="space-y-2">
+              <div className="flex flex-wrap gap-2 mb-3">
                 {tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-4 py-1.5 bg-green/5 text-green font-medium rounded-full text-sm"
+                    className="px-3 py-1 bg-green/8 text-green font-medium rounded-full text-xs font-work-sans"
                   >
                     #{tag}
                   </span>
                 ))}
               </div>
+              <h1 className="text-3xl md:text-4xl font-bold font-playfair-display text-content leading-tight">
+                {bookName}
+              </h1>
+              <p className="text-base font-medium text-content/60 font-work-sans">
+                By {author}
+              </p>
             </div>
 
-            <div className="my-6 border-t border-gray-100" />
+            <div className="my-5 border-t border-gray-100" />
+
+            {/* Category */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-content/40 uppercase tracking-wider font-work-sans">
+                Category
+              </span>
+              <span className="px-3 py-1 bg-gray-50 rounded-lg text-sm font-medium text-content/70 font-work-sans">
+                {category}
+              </span>
+            </div>
+
+            <div className="my-5 border-t border-gray-100" />
+
+            {/* Review Section */}
+            <div className="font-work-sans">
+              <p className="text-xs font-semibold text-content/40 uppercase tracking-wider mb-2">
+                Review
+              </p>
+              <p className="text-content/70 leading-relaxed text-sm">
+                {review}
+              </p>
+            </div>
+
+            <div className="my-5 border-t border-gray-100" />
 
             {/* Technical Specs Table */}
-            <div className="space-y-3 font-work-sans max-w-sm">
-              <div className="flex justify-between">
-                <span className="text-content/70">Number of Pages:</span>
-                <span className="font-bold text-content">{totalPages}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-content/70">Publisher:</span>
-                <span className="font-bold text-content">{publisher}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-content/70">Year of Publishing:</span>
-                <span className="font-bold text-content">
-                  {yearOfPublishing}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-content/70">Rating:</span>
-                <span className="font-bold text-content">{rating}</span>
-              </div>
+            <div className="grid grid-cols-2 gap-3 font-work-sans">
+              {[
+                { label: "Pages", value: totalPages },
+                { label: "Publisher", value: publisher },
+                { label: "Year", value: yearOfPublishing },
+                { label: "Rating", value: `${rating} ★` },
+              ].map(({ label, value }) => (
+                <div key={label} className="bg-gray-50 rounded-xl px-4 py-3">
+                  <p className="text-xs text-content/40 font-medium mb-0.5">
+                    {label}
+                  </p>
+                  <p className="font-bold text-content text-sm">{value}</p>
+                </div>
+              ))}
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <button
-                className="px-8 py-4 border border-content/20 rounded-xl font-bold text-lg hover:bg-content hover:text-white transition-all active:scale-95"
+                className={`flex-1 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 active:scale-95 border ${
+                  isBookExistInRead
+                    ? "bg-content text-white border-content cursor-default"
+                    : "border-gray-200 text-content hover:bg-content hover:text-white hover:border-content"
+                }`}
                 onClick={() => handleAddToRead()}
               >
                 {isBookExistInRead ? "✓ Added to Read" : "Add to Read"}
               </button>
               <button
-                className="px-8 py-4 bg-[#50B1C9] hover:bg-[#409db3] text-white rounded-xl font-bold text-lg transition-all active:scale-95 shadow-lg"
+                className={`flex-1 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-200 active:scale-95 shadow-md ${
+                  isBookExistInWishList
+                    ? "bg-[#409db3] text-white cursor-default"
+                    : "bg-[#50B1C9] hover:bg-[#409db3] text-white shadow-[#50B1C9]/30"
+                }`}
                 onClick={() => handleAddToWishList()}
               >
                 {isBookExistInWishList

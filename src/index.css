@@ -16,4 +16,33 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
+  scrollbar-gutter: stable both-edges;
 }
+
+/* Smooth page transitions */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #23be0a40;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #23be0a;
+}
+
+/* Toast customization */
+.Toastify__toast {
+  border-radius: 0.75rem !important;
+  font-family: "Work Sans", sans-serif !important;
+}
+

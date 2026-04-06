@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   const navLinks = (
@@ -7,7 +7,7 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+            `text-base font-semibold px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "text-green bg-green/8" : "text-content/60 hover:text-green hover:bg-green/5"}`
           }
         >
           Home
@@ -17,7 +17,7 @@ const Navbar = () => {
         <NavLink
           to="/listed-books"
           className={({ isActive }) =>
-            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+            `text-base font-semibold px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "text-green bg-green/8" : "text-content/60 hover:text-green hover:bg-green/5"}`
           }
         >
           Listed Books
@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavLink
           to="/pages-to-read"
           className={({ isActive }) =>
-            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+            `text-base font-semibold px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "text-green bg-green/8" : "text-content/60 hover:text-green hover:bg-green/5"}`
           }
         >
           Pages to Read
@@ -36,19 +36,19 @@ const Navbar = () => {
     </>
   );
   return (
-    <nav className="px-4 fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 font-work-sans">
-      <div className="navbar lg:container mx-auto px-0">
+    <nav className="px-4 fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100/80 font-work-sans shadow-sm shadow-gray-100/50">
+      <div className="navbar lg:container mx-auto px-0 min-h-16">
         {/* Mobile Menu & Logo */}
         <div className="navbar-start">
           <div className="dropdown">
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden mr-2 text-content px-2"
+              className="btn btn-ghost lg:hidden mr-1 text-content px-2 hover:bg-green/5"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -63,40 +63,35 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow-xl bg-base-100 rounded-2xl w-52 border border-gray-100"
+              className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow-xl bg-white rounded-2xl w-52 border border-gray-100"
             >
-              <li>
-                <a href="/" className="active:bg-green">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/listed-books">Listed Books</a>
-              </li>
-              <li>
-                <a href="/pages-to-read">Pages to Read</a>
+              {navLinks}
+              <li className="sm:hidden mt-1 pt-1 border-t border-gray-100 px-1">
+                <button className="w-full mt-1 px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-content/70 hover:text-green hover:border-green hover:bg-green/5 active:bg-green/5 transition-all duration-200 text-center">
+                  Sign In
+                </button>
               </li>
             </ul>
           </div>
-          <a
-            className="text-2xl md:text-3xl font-extrabold tracking-tight text-content hover:opacity-80 transition-opacity"
-            href="/"
+          <Link
+            className="text-xl md:text-2xl font-extrabold tracking-tight text-content hover:opacity-75 transition-opacity duration-200"
+            to="/"
           >
             Book<span className="text-green">Vibe</span>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
+          <ul className="menu menu-horizontal px-1 gap-1">{navLinks}</ul>
         </div>
 
         {/* Action Buttons */}
-        <div className="navbar-end gap-3">
-          <button className="hidden sm:inline-flex btn bg-white hover:bg-green/5 hover:text-green border border-green text-content/80 px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
+        <div className="navbar-end gap-2">
+          <button className="hidden sm:inline-flex btn btn-sm h-9 bg-white hover:bg-green/5 hover:text-green border border-gray-200 hover:border-green text-content/70 px-5 rounded-lg font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-95 text-sm">
             Sign In
           </button>
-          <button className="btn bg-green hover:bg-green-hover border border-transparent text-white px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
+          <button className="btn btn-sm h-9 bg-green hover:bg-green-hover border-0 text-white px-5 rounded-lg font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-95 shadow-md shadow-green/20 text-sm">
             Sign Up
           </button>
         </div>
