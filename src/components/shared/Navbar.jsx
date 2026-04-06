@@ -1,4 +1,40 @@
+import { NavLink } from "react-router";
+
 const Navbar = () => {
+  const navLinks = (
+    <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/listed-books"
+          className={({ isActive }) =>
+            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+          }
+        >
+          Listed Books
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/pages-to-read"
+          className={({ isActive }) =>
+            `text-lg font-medium px-5 py-2.5 rounded-xl border ${isActive ? "border-green text-green bg-green/5" : "border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"}`
+          }
+        >
+          Pages to Read
+        </NavLink>
+      </li>
+    </>
+  );
   return (
     <nav className="px-4 fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 font-work-sans">
       <div className="navbar lg:container mx-auto px-0">
@@ -52,32 +88,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">
-            <li>
-              <a
-                href="/"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-green text-green bg-green/5"
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="/listed-books"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"
-              >
-                Listed Books
-              </a>
-            </li>
-            <li>
-              <a
-                href="/pages-to-read"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"
-              >
-                Pages to Read
-              </a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
         </div>
 
         {/* Action Buttons */}

@@ -1,6 +1,9 @@
 import { useLoaderData, useParams } from "react-router";
+import useTitle from "../hooks/useTitle";
 
 const BookDetails = () => {
+  useTitle("Book Details | Book Vibe");
+
   const { bookParamsId } = useParams();
   const books = useLoaderData();
 

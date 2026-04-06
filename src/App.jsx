@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import Navbar from "./components/shared/Navbar";
 import Home from "./pages/Home";
+import ListedBooks from "./pages/ListedBooks";
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
       <Navbar />
       <Outlet>
         <Home />
+        <ListedBooks />
       </Outlet>
     </>
   );

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Home from "../pages/Home";
 import BookDetails from "../pages/BookDetails";
+import ListedBooks from "../pages/ListedBooks";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
         Component: BookDetails,
         loader: () => fetch("booksData.json"),
         HydrateFallback: () => <p>Loading...</p>,
+      },
+      {
+        path: "/listed-books",
+        Component: ListedBooks,
       },
     ],
   },
