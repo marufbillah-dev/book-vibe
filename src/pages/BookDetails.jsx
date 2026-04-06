@@ -2,6 +2,8 @@ import { useLoaderData, useParams } from "react-router";
 import useTitle from "../hooks/useTitle";
 import { useContext } from "react";
 import { BooksContext } from "../context/BooksContext";
+import { toast } from "react-toastify";
+import { addReadList, addWishList } from "../utils/localDB";
 
 const BookDetails = () => {
   useTitle("Book Details | Book Vibe");
@@ -27,13 +29,19 @@ const BookDetails = () => {
   const { readBooks, setReadBooks } = useContext(BooksContext);
   const isBookExistInRead = readBooks.some((b) => b.bookId === bookId);
   const handleAddToRead = () => {
-    !isBookExistInRead && setReadBooks([...readBooks, book]);
+    !isBookExistInRead &&
+      (setReadBooks([...readBooks, book]),
+      toast.success("The book added to read!"),
+      addReadList(book));
   };
 
   const { wishList, setWishList } = useContext(BooksContext);
   const isBookExistInWishList = wishList.some((b) => b.bookId === bookId);
   const handleAddToWishList = () => {
-    !isBookExistInWishList && setWishList([...wishList, book]);
+    !isBookExistInWishList &&
+      (setWishList([...wishList, book]),
+      toast.success("The book added to wish list!"),
+      addWishList(book));
   };
 
   return (

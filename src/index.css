@@ -12,3 +12,8 @@
   --color-green: #23be0a;
   --color-green-hover: #1fa809;
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}

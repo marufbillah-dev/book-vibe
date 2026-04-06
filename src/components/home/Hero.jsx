@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import heroImage from "../../assets/hero.jpg";
 
 const Hero = () => {
@@ -13,9 +14,11 @@ const Hero = () => {
               <span className="text-green underline italic">bookshelf</span>
             </h1>
             <div className="pt-4">
-              <button className="px-10 py-4 bg-green hover:bg-green-hover rounded-xl text-white text-lg font-bold shadow-xl transition-all hover:-translate-y-0.5 active:translate-y-0">
-                View The List
-              </button>
+              <a href="#books">
+                <button className="px-10 py-4 bg-green hover:bg-green-hover rounded-xl text-white text-lg font-bold shadow-xl transition-all hover:-translate-y-0.5 active:translate-y-0">
+                  View The List
+                </button>
+              </a>
             </div>
           </div>
 

@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import ListedBooks from "./pages/ListedBooks";
 import ContextProvider from "./context/ContextProvider";
 import PagesToRead from "./pages/pages-to-read/PagesToRead";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <PagesToRead />
         </Outlet>
       </ContextProvider>
+      <ToastContainer />
     </>
   );
 };

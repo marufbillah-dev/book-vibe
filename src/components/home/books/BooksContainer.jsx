@@ -9,7 +9,7 @@ const BooksContainer = () => {
   const books = use(booksDataPromise);
 
   return (
-    <section className="px-4 py-10">
+    <section className="px-4 py-10" id="books">
       <div className="lg:container mx-auto space-y-9">
         {/* Title */}
         <div className="text-center">
