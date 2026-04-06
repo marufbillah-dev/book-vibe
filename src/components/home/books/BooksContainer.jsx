@@ -1,3 +1,5 @@
+import BookCard from "./BookCard";
+
 const BooksContainer = () => {
   return (
     <section className="px-4 py-10">
@@ -10,7 +12,11 @@ const BooksContainer = () => {
         </div>
 
         {/* Card Container */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <BookCard />
+          <BookCard />
+          <BookCard />
+        </div>
       </div>
     </section>
   );
