@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { BooksContext } from "../../../../context/BooksContext";
 
 const ListedBooksContainer = () => {
-  const { readBooks } = useContext(BooksContext);
+  const { readBooks, wishList } = useContext(BooksContext);
 
   return (
     <section className="px-4 mt-30">
@@ -47,9 +47,9 @@ const ListedBooksContainer = () => {
               </TabPanel>
               <TabPanel>
                 <div className="flex flex-col gap-6">
-                  <ListedBookCard />
-                  <ListedBookCard />
-                  <ListedBookCard />
+                  {wishList.map((book) => (
+                    <ListedBookCard key={book.bookId} book={book} />
+                  ))}
                 </div>
               </TabPanel>
             </Tabs>

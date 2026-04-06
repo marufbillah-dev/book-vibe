@@ -25,9 +25,15 @@ const BookDetails = () => {
   } = book;
 
   const { readBooks, setReadBooks } = useContext(BooksContext);
-  const isBookExist = readBooks.some((b) => b.bookId === bookId);
+  const isBookExistInRead = readBooks.some((b) => b.bookId === bookId);
   const handleAddToRead = () => {
-    !isBookExist && setReadBooks([...readBooks, book]);
+    !isBookExistInRead && setReadBooks([...readBooks, book]);
+  };
+
+  const { wishList, setWishList } = useContext(BooksContext);
+  const isBookExistInWishList = wishList.some((b) => b.bookId === bookId);
+  const handleAddToWishList = () => {
+    !isBookExistInWishList && setWishList([...wishList, book]);
   };
 
   return (
@@ -117,10 +123,15 @@ const BookDetails = () => {
                 className="px-8 py-4 border border-content/20 rounded-xl font-bold text-lg hover:bg-content hover:text-white transition-all active:scale-95"
                 onClick={() => handleAddToRead()}
               >
-                {isBookExist ? "✓ Added to Read" : "Add to Read"}
+                {isBookExistInRead ? "✓ Added to Read" : "Add to Read"}
               </button>
-              <button className="px-8 py-4 bg-[#50B1C9] hover:bg-[#409db3] text-white rounded-xl font-bold text-lg transition-all active:scale-95 shadow-lg">
-                Add to Wishlist
+              <button
+                className="px-8 py-4 bg-[#50B1C9] hover:bg-[#409db3] text-white rounded-xl font-bold text-lg transition-all active:scale-95 shadow-lg"
+                onClick={() => handleAddToWishList()}
+              >
+                {isBookExistInWishList
+                  ? "✓ Added to Wishlist"
+                  : "Add to Wishlist"}
               </button>
             </div>
           </div>
