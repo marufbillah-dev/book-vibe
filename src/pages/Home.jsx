@@ -1,3 +1,4 @@
+import BooksContainer from "../components/home/books/BooksContainer";
 import Hero from "../components/home/Hero";
 import useTitle from "../hooks/useTitle";
 
@@ -7,6 +8,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <BooksContainer />
     </>
   );
 };

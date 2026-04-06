@@ -8,4 +8,7 @@
 @theme {
   --font-work-sans: "Work Sans", sans-serif;
   --font-playfair-display: "Playfair Display", serif;
+  --color-content: #131313;
+  --color-green: #23be0a;
+  --color-green-hover: #1fa809;
 }

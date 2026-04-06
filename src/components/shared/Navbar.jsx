@@ -8,7 +8,7 @@ const Navbar = () => {
             <div
               tabIndex={0}
               role="button"
-              className="btn btn-ghost lg:hidden mr-2 text-[#131313] px-2"
+              className="btn btn-ghost lg:hidden mr-2 text-content px-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow-xl bg-base-100 rounded-2xl w-52 border border-gray-100"
             >
               <li>
-                <a href="/" className="active:bg-[#23BE0A]">
+                <a href="/" className="active:bg-green">
                   Home
                 </a>
               </li>
@@ -43,10 +43,10 @@ const Navbar = () => {
             </ul>
           </div>
           <a
-            className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#131313] hover:opacity-80 transition-opacity"
+            className="text-2xl md:text-3xl font-extrabold tracking-tight text-content hover:opacity-80 transition-opacity"
             href="/"
           >
-            Book<span className="text-[#23BE0A]">Vibe</span>
+            Book<span className="text-green">Vibe</span>
           </a>
         </div>
 
@@ -56,7 +56,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-[#23BE0A] text-[#23BE0A] bg-[#23BE0A]/5"
+                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-green text-green bg-green/5"
               >
                 Home
               </a>
@@ -64,7 +64,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/listed-books"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-[#131313]/70 hover:text-[#23BE0A] hover:bg-[#23BE0A]/5 transition-all"
+                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"
               >
                 Listed Books
               </a>
@@ -72,7 +72,7 @@ const Navbar = () => {
             <li>
               <a
                 href="/pages-to-read"
-                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-[#131313]/70 hover:text-[#23BE0A] hover:bg-[#23BE0A]/5 transition-all"
+                className="text-lg font-medium px-5 py-2.5 rounded-xl border border-transparent text-content/70 hover:text-green hover:bg-green/5 transition-all"
               >
                 Pages to Read
               </a>
@@ -82,10 +82,10 @@ const Navbar = () => {
 
         {/* Action Buttons */}
         <div className="navbar-end gap-3">
-          <button className="hidden sm:inline-flex btn bg-white hover:bg-[#23BE0A]/5 hover:text-[#23BE0A] border border-[#1fa809] text-[#131313]/80 px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
+          <button className="hidden sm:inline-flex btn bg-white hover:bg-green/5 hover:text-green border border-green text-content/80 px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
             Sign In
           </button>
-          <button className="btn bg-[#23BE0A] hover:bg-[#1fa809] border border-transparent text-white px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
+          <button className="btn bg-green hover:bg-green-hover border border-transparent text-white px-8 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
             Sign Up
           </button>
         </div>
