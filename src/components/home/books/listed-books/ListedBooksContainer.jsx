@@ -3,6 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import ListedBookCard from "./ListedBookCard";
 import { useContext, useState } from "react";
 import { BooksContext } from "../../../../context/BooksContext";
+import EmptyState from "./EmptyState";
 
 const ListedBooksContainer = () => {
   const { readBooks, wishList } = useContext(BooksContext);
@@ -100,19 +101,28 @@ const ListedBooksContainer = () => {
 
               <TabPanel>
                 <div className="flex flex-col gap-6">
-                  {(filteredReadList.length ? filteredReadList : readBooks).map(
-                    (book) => (
+                  {readBooks.length ? (
+                    (filteredReadList.length
+                      ? filteredReadList
+                      : readBooks
+                    ).map((book) => (
                       <ListedBookCard key={book.bookId} book={book} />
-                    ),
+                    ))
+                  ) : (
+                    <EmptyState message="You haven't marked any books as 'Read' yet. Finish a book and add it here!" />
                   )}
                 </div>
               </TabPanel>
               <TabPanel>
                 <div className="flex flex-col gap-6">
-                  {(filteredWishList.length ? filteredWishList : wishList).map(
-                    (book) => (
-                      <ListedBookCard key={book.bookId} book={book} />
-                    ),
+                  {wishList.length ? (
+                    (filteredWishList.length ? filteredWishList : wishList).map(
+                      (book) => (
+                        <ListedBookCard key={book.bookId} book={book} />
+                      ),
+                    )
+                  ) : (
+                    <EmptyState message="Your wishlist is empty. Save books you want to read later!" />
                   )}
                 </div>
               </TabPanel>
