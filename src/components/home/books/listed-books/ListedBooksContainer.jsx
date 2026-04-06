@@ -1,8 +1,12 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import ListedBookCard from "./ListedBookCard";
+import { useContext } from "react";
+import { BooksContext } from "../../../../context/BooksContext";
 
 const ListedBooksContainer = () => {
+  const { readBooks } = useContext(BooksContext);
+
   return (
     <section className="px-4 mt-30">
       <div className="lg:container mx-auto space-y-10">
@@ -16,7 +20,7 @@ const ListedBooksContainer = () => {
         {/* Sort Items */}
         <div className="text-center">
           <select name="">
-            <option value="" selected disabled>
+            <option defaultValue={"Sort By"} disabled>
               Sort By
             </option>
             <option value="">Ratings</option>
@@ -36,13 +40,17 @@ const ListedBooksContainer = () => {
 
               <TabPanel>
                 <div className="flex flex-col gap-6">
+                  {readBooks.map((book) => (
+                    <ListedBookCard key={book.bookId} book={book} />
+                  ))}
+                </div>
+              </TabPanel>
+              <TabPanel>
+                <div className="flex flex-col gap-6">
                   <ListedBookCard />
                   <ListedBookCard />
                   <ListedBookCard />
                 </div>
-              </TabPanel>
-              <TabPanel>
-                <h2>Any content 2</h2>
               </TabPanel>
             </Tabs>
           </div>

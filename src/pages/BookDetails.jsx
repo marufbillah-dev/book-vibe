@@ -1,5 +1,7 @@
 import { useLoaderData, useParams } from "react-router";
 import useTitle from "../hooks/useTitle";
+import { useContext } from "react";
+import { BooksContext } from "../context/BooksContext";
 
 const BookDetails = () => {
   useTitle("Book Details | Book Vibe");
@@ -7,7 +9,9 @@ const BookDetails = () => {
   const { bookParamsId } = useParams();
   const books = useLoaderData();
 
+  const book = books.find((book) => book.bookId == bookParamsId);
   const {
+    bookId,
     bookName,
     author,
     image,
@@ -18,7 +22,13 @@ const BookDetails = () => {
     tags,
     publisher,
     yearOfPublishing,
-  } = books.find((book) => book.bookId == bookParamsId);
+  } = book;
+
+  const { readBooks, setReadBooks } = useContext(BooksContext);
+  const isBookExist = readBooks.some((b) => b.bookId === bookId);
+  const handleAddToRead = () => {
+    !isBookExist && setReadBooks([...readBooks, book]);
+  };
 
   return (
     <section className=" min-h-screen pt-26 px-4">
@@ -103,11 +113,14 @@ const BookDetails = () => {
 
             {/* Action Buttons */}
             <div className="flex gap-4 mt-8">
-              <button className="px-8 py-4 border border-content/20 rounded-xl font-bold text-lg hover:bg-content hover:text-white transition-all active:scale-95">
-                Read
+              <button
+                className="px-8 py-4 border border-content/20 rounded-xl font-bold text-lg hover:bg-content hover:text-white transition-all active:scale-95"
+                onClick={() => handleAddToRead()}
+              >
+                {isBookExist ? "✓ Added to Read" : "Add to Read"}
               </button>
               <button className="px-8 py-4 bg-[#50B1C9] hover:bg-[#409db3] text-white rounded-xl font-bold text-lg transition-all active:scale-95 shadow-lg">
-                Wishlist
+                Add to Wishlist
               </button>
             </div>
           </div>
