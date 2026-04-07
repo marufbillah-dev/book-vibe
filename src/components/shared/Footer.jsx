@@ -22,14 +22,18 @@ const Footer = () => {
             {/* Socials */}
             <div className="flex items-center gap-3 pt-1">
               {[
-                { Icon: FaGithub, href: "#" },
+                { Icon: FaGithub, href: "https://github.com/marufbillah-dev" },
                 { Icon: FaXTwitter, href: "#" },
-                { Icon: FaLinkedinIn, href: "#" },
+                {
+                  Icon: FaLinkedinIn,
+                  href: "https://www.linkedin.com/in/marufbillah-dev",
+                },
                 // eslint-disable-next-line no-unused-vars
               ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
                   href={href}
+                  target="_blank"
                   className="w-8 h-8 rounded-lg bg-white/5 hover:bg-green/20 hover:text-green flex items-center justify-center text-white/50 transition-all duration-200"
                 >
                   <Icon className="w-4 h-4" />
@@ -52,6 +56,7 @@ const Footer = () => {
                 <li key={to}>
                   <Link
                     to={to}
+                    onClick={() => window.scrollTo({ top: 0 })}
                     className="text-sm text-white/50 hover:text-green transition-colors duration-200"
                   >
                     {label}
@@ -75,6 +80,7 @@ const Footer = () => {
                 <li key={to}>
                   <Link
                     to={to}
+                    onClick={() => window.scrollTo({ top: 0 })}
                     className="text-sm text-white/50 hover:text-green transition-colors duration-200"
                   >
                     {label}
