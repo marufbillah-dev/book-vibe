@@ -1,7 +1,15 @@
 import ListedBookCard from "./ListedBookCard";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { BooksContext } from "../../../../context/BooksContext";
 import EmptyState from "./EmptyState";
+import { ChevronDown, Check } from "lucide-react";
+
+const SORT_OPTIONS = [
+  { value: "default", label: "Default" },
+  { value: "rating", label: "Ratings" },
+  { value: "pages", label: "Number of Pages" },
+  { value: "year", label: "Published Year" },
+];
 
 const ListedBooksContainer = () => {
   const { readBooks, wishList } = useContext(BooksContext);
@@ -10,6 +18,31 @@ const ListedBooksContainer = () => {
   const { filteredWishList, setFilteredWishList } = useContext(BooksContext);
 
   const [activeTab, setActiveTab] = useState("Read Books");
+  const [sortValue, setSortValue] = useState("default");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleSortChange = (value) => {
+    setSortValue(value);
+    setDropdownOpen(false);
+    const fakeEvent = { target: { value } };
+    if (activeTab === "Read Books") {
+      handleReadBooksSort(fakeEvent);
+    } else {
+      handleWishListSort(fakeEvent);
+    }
+  };
 
   const handleTabChange = (index) => {
     if (index === 0) {
@@ -79,19 +112,41 @@ const ListedBooksContainer = () => {
           <label className="text-sm font-semibold text-content/50 font-work-sans">
             Sort by:
           </label>
-          <select
-            onChange={
-              activeTab === "Read Books"
-                ? handleReadBooksSort
-                : handleWishListSort
-            }
-            className="text-sm font-medium text-content bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-green/30 focus:border-green transition-all cursor-pointer font-work-sans"
-          >
-            <option value="default">Default</option>
-            <option value="rating">Ratings</option>
-            <option value="pages">Number of Pages</option>
-            <option value="year">Published Year</option>
-          </select>
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setDropdownOpen((o) => !o)}
+              className="flex items-center gap-2 text-sm font-semibold text-content bg-gray-50 border border-gray-200 rounded-lg px-4 py-1.5 hover:border-green hover:bg-green/5 hover:text-green transition-all duration-200 focus:outline-none min-w-40 justify-between font-work-sans"
+            >
+              <span>
+                {SORT_OPTIONS.find((o) => o.value === sortValue)?.label}
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            {dropdownOpen && (
+              <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-xl z-20 py-1.5 overflow-hidden font-work-sans">
+                {SORT_OPTIONS.map((option) => (
+                  <li key={option.value}>
+                    <button
+                      onClick={() => handleSortChange(option.value)}
+                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors duration-150 ${
+                        sortValue === option.value
+                          ? "text-green bg-green/5 font-semibold"
+                          : "text-content/70 hover:bg-gray-50 hover:text-content font-medium"
+                      }`}
+                    >
+                      {option.label}
+                      {sortValue === option.value && (
+                        <Check className="w-3.5 h-3.5 text-green" />
+                      )}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
         {/* Listed Books Container */}
