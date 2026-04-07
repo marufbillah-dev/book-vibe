@@ -7,6 +7,7 @@ import PagesToRead from "./pages/pages-to-read/PagesToRead";
 import { ToastContainer } from "react-toastify";
 import ScrollToTop from "./hooks/ScrollToTop";
 import Footer from "./components/shared/Footer";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Home />
           <ListedBooks />
           <PagesToRead />
+          <NotFound />
         </Outlet>
         <Footer />
       </ContextProvider>
