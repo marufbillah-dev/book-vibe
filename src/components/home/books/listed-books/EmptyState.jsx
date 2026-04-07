@@ -1,7 +1,17 @@
 import { BookOpen } from "lucide-react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 const EmptyState = ({ message }) => {
+  const navigate = useNavigate();
+
+  const handleBrowse = () => {
+    navigate("/");
+    // After navigation + ScrollToTop resets position, scroll to #books
+    setTimeout(() => {
+      document.getElementById("books")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <div className="min-h-72 flex flex-col items-center justify-center text-center px-6 py-12 bg-gray-50/60 rounded-xl border border-dashed border-gray-200">
       {/* Icon Circle */}
@@ -19,12 +29,12 @@ const EmptyState = ({ message }) => {
       </p>
 
       {/* Action Button */}
-      <Link
-        to={"/"}
+      <button
+        onClick={handleBrowse}
         className="px-6 py-2.5 bg-green hover:bg-green-hover text-white rounded-lg text-sm font-bold transition-all duration-200 hover:shadow-md hover:shadow-green/20 active:scale-95"
       >
         Browse Books
-      </Link>
+      </button>
     </div>
   );
 };

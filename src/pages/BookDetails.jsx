@@ -1,15 +1,17 @@
-import { useLoaderData, useParams } from "react-router";
+import { useLoaderData, useParams, useNavigate } from "react-router";
 import useTitle from "../hooks/useTitle";
 import { useContext } from "react";
 import { BooksContext } from "../context/BooksContext";
 import { toast } from "react-toastify";
 import { addReadList, addWishList } from "../utils/localDB";
+import { ArrowLeft } from "lucide-react";
 
 const BookDetails = () => {
   useTitle("Book Details | Book Vibe");
 
   const { bookParamsId } = useParams();
   const books = useLoaderData();
+  const navigate = useNavigate();
 
   const book = books.find((book) => book.bookId == bookParamsId);
   const {
@@ -45,21 +47,32 @@ const BookDetails = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-16 px-4 bg-gray-50/30">
+    <section className="min-h-screen pt-20 pb-10 px-4 bg-gray-50/30">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
-          {/* Left Column: Image Container */}
-          <div className="bg-linear-to-br from-gray-50 to-gray-100/80 rounded-2xl p-10 md:p-16 flex justify-center items-center">
-            <img
-              src={image}
-              alt={bookName}
-              className="w-full max-w-72 drop-shadow-2xl transform transition-transform hover:scale-[1.03] duration-500"
-            />
+        {/* Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-sm font-semibold text-content/50 hover:text-green transition-colors duration-200 mb-6 group font-work-sans"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+          Back
+        </button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Image — sticky on desktop */}
+          <div className="lg:sticky lg:top-24">
+            <div className="bg-linear-to-br from-gray-50 to-gray-100/80 rounded-2xl p-10 md:p-16 flex justify-center items-center">
+              <img
+                src={image}
+                alt={bookName}
+                className="w-full max-w-64 drop-shadow-2xl transform transition-transform hover:scale-[1.03] duration-500"
+              />
+            </div>
           </div>
 
           {/* Right Column: Details */}
-          <div className="flex flex-col h-full bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-            {/* Title and Author */}
+          <div className="flex flex-col bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
+            {/* Tags + Title + Author */}
             <div className="space-y-2">
               <div className="flex flex-wrap gap-2 mb-3">
                 {tags.map((tag, index) => (
@@ -93,7 +106,7 @@ const BookDetails = () => {
 
             <div className="my-5 border-t border-gray-100" />
 
-            {/* Review Section */}
+            {/* Review */}
             <div className="font-work-sans">
               <p className="text-xs font-semibold text-content/40 uppercase tracking-wider mb-2">
                 Review
@@ -105,7 +118,7 @@ const BookDetails = () => {
 
             <div className="my-5 border-t border-gray-100" />
 
-            {/* Technical Specs Table */}
+            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-3 font-work-sans">
               {[
                 { label: "Pages", value: totalPages },
@@ -130,7 +143,7 @@ const BookDetails = () => {
                     ? "bg-content text-white border-content cursor-default"
                     : "border-gray-200 text-content hover:bg-content hover:text-white hover:border-content"
                 }`}
-                onClick={() => handleAddToRead()}
+                onClick={handleAddToRead}
               >
                 {isBookExistInRead ? "✓ Added to Read" : "Add to Read"}
               </button>
@@ -140,7 +153,7 @@ const BookDetails = () => {
                     ? "bg-[#409db3] text-white cursor-default"
                     : "bg-[#50B1C9] hover:bg-[#409db3] text-white shadow-[#50B1C9]/30"
                 }`}
-                onClick={() => handleAddToWishList()}
+                onClick={handleAddToWishList}
               >
                 {isBookExistInWishList
                   ? "✓ Added to Wishlist"

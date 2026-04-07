@@ -3,6 +3,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { BooksContext } from "../../../../context/BooksContext";
 import EmptyState from "./EmptyState";
 import { ChevronDown, Check } from "lucide-react";
+import { useSearchParams } from "react-router";
 
 const SORT_OPTIONS = [
   { value: "default", label: "Default" },
@@ -17,7 +18,8 @@ const ListedBooksContainer = () => {
   const { filteredReadList, setFilteredReadList } = useContext(BooksContext);
   const { filteredWishList, setFilteredWishList } = useContext(BooksContext);
 
-  const [activeTab, setActiveTab] = useState("Read Books");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get("tab") === "wish" ? "Wishlist" : "Read Books";
   const [sortValue, setSortValue] = useState("default");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -45,11 +47,7 @@ const ListedBooksContainer = () => {
   };
 
   const handleTabChange = (index) => {
-    if (index === 0) {
-      setActiveTab("Read Books");
-    } else {
-      setActiveTab("Wishlist");
-    }
+    setSearchParams({ tab: index === 0 ? "read" : "wish" });
   };
 
   const handleReadBooksSort = (e) => {
