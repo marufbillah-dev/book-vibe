@@ -2,6 +2,7 @@ import { MapPin, Users, FileText, Trash2 } from "lucide-react";
 import { useContext } from "react";
 import { BooksContext } from "../../../../context/BooksContext";
 import { removeReadList, removeWishList } from "../../../../utils/localDB";
+import { Link } from "react-router";
 
 const ListedBookCard = ({ book, listType }) => {
   const {
@@ -99,9 +100,11 @@ const ListedBookCard = ({ book, listType }) => {
           <span className="px-3 py-1 bg-amber-50 text-amber-500 rounded-full text-xs font-semibold">
             ★ {rating}
           </span>
-          <button className="px-4 py-1.5 bg-green hover:bg-green-hover text-white rounded-full text-xs font-semibold transition-all duration-200 hover:shadow-md hover:shadow-green/20 active:scale-95 ml-auto">
-            View Details
-          </button>
+          <Link to={`/book-details/${bookId}`}>
+            <button className="px-4 py-1.5 bg-green hover:bg-green-hover text-white rounded-full text-xs font-semibold transition-all duration-200 hover:shadow-md hover:shadow-green/20 active:scale-95 ml-auto">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>
