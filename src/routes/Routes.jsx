@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import BookDetails from "../pages/BookDetails";
 import ListedBooks from "../pages/ListedBooks";
 import PagesToRead from "../pages/pages-to-read/PagesToRead";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/pages-to-read",
         Component: PagesToRead,
+      },
+      {
+        path: "*",
+        Component: NotFound,
       },
     ],
   },
