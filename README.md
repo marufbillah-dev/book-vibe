@@ -99,11 +99,12 @@ src/
 │   │           └── ListedBooksContainer.jsx
 │   └── shared/
 │       ├── Footer.jsx
-│       ├── Navbar.jsx
-│       └── ScrollToTop.jsx
+│       └── Navbar.jsx
 ├── context/
 │   ├── BooksContext.jsx   # React context definition
 │   └── ContextProvider.jsx
+├── helper/
+│   └── ScrollToTop.jsx
 ├── hooks/
 │   └── useTitle.jsx       # Dynamic page title hook
 ├── pages/
