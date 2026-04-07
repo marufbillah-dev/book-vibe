@@ -33,9 +33,7 @@ const BookCard = ({ book }) => {
           <h3 className="text-xl font-bold font-playfair-display text-content line-clamp-1 group-hover:text-green transition-colors duration-200">
             {bookName}
           </h3>
-          <p className="text-content/60 text-sm font-work-sans">
-            By {author}
-          </p>
+          <p className="text-content/60 text-sm font-work-sans">By {author}</p>
         </div>
 
         {/* Divider */}
@@ -43,7 +41,9 @@ const BookCard = ({ book }) => {
 
         {/* Footer Info */}
         <div className="flex justify-between items-center text-content/70 font-work-sans text-sm font-medium">
-          <span className="px-2.5 py-1 bg-gray-50 rounded-lg text-content/60">{category}</span>
+          <span className="px-2.5 py-1 bg-gray-50 rounded-lg text-content/60">
+            {category}
+          </span>
           <div className="flex items-center gap-1.5">
             <span className="font-semibold text-content/80">{rating}</span>
             <Star className="w-4 h-4 text-amber-400 fill-amber-400" />

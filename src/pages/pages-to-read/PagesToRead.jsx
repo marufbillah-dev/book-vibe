@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { BooksContext } from "../../context/BooksContext";
 import NoReadBooks from "./NoReadBooks";
+import useTitle from "../../hooks/useTitle";
 
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3}
@@ -62,7 +63,7 @@ const CustomXAxisTick = ({ x, y, payload, isMobile }) => {
   );
 };
 
-// Clean tooltip
+// tooltip
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -81,6 +82,7 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const PagesToRead = () => {
+  useTitle("Chart | Book Vibe");
   const { readBooks } = useContext(BooksContext);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -156,7 +158,10 @@ const PagesToRead = () => {
                   fontSize: isMobile ? 11 : 13,
                 }}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f9fafb" }} />
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ fill: "#f9fafb" }}
+              />
               <Bar
                 dataKey="pages"
                 shape={<TriangleBar />}

@@ -99,7 +99,8 @@ const ListedBooksContainer = () => {
           {/* Custom Tab Bar */}
           <div className="flex border-b border-gray-100">
             {["Read Books", "Wishlist Books"].map((tab, index) => {
-              const isActive = activeTab === (index === 0 ? "Read Books" : "Wishlist");
+              const isActive =
+                activeTab === (index === 0 ? "Read Books" : "Wishlist");
               const count = index === 0 ? readBooks.length : wishList.length;
               return (
                 <button
@@ -136,7 +137,13 @@ const ListedBooksContainer = () => {
               <div className="flex flex-col gap-4">
                 {readBooks.length ? (
                   (filteredReadList.length ? filteredReadList : readBooks).map(
-                    (book) => <ListedBookCard key={book.bookId} book={book} />,
+                    (book) => (
+                      <ListedBookCard
+                        key={book.bookId}
+                        book={book}
+                        listType="read"
+                      />
+                    ),
                   )
                 ) : (
                   <EmptyState message="You haven't marked any books as 'Read' yet. Finish a book and add it here!" />
@@ -146,7 +153,13 @@ const ListedBooksContainer = () => {
               <div className="flex flex-col gap-4">
                 {wishList.length ? (
                   (filteredWishList.length ? filteredWishList : wishList).map(
-                    (book) => <ListedBookCard key={book.bookId} book={book} />,
+                    (book) => (
+                      <ListedBookCard
+                        key={book.bookId}
+                        book={book}
+                        listType="wish"
+                      />
+                    ),
                   )
                 ) : (
                   <EmptyState message="Your wishlist is empty. Save books you want to read later!" />

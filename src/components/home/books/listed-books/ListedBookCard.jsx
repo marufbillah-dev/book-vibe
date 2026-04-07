@@ -1,7 +1,11 @@
-import { MapPin, Users, FileText } from "lucide-react";
+import { MapPin, Users, FileText, Trash2 } from "lucide-react";
+import { useContext } from "react";
+import { BooksContext } from "../../../../context/BooksContext";
+import { removeReadList, removeWishList } from "../../../../utils/localDB";
 
-const ListedBookCard = ({ book }) => {
+const ListedBookCard = ({ book, listType }) => {
   const {
+    bookId,
     bookName,
     author,
     image,
@@ -13,32 +17,53 @@ const ListedBookCard = ({ book }) => {
     tags,
   } = book;
 
+  const { readBooks, setReadBooks, wishList, setWishList } =
+    useContext(BooksContext);
+
+  const handleDelete = () => {
+    if (listType === "read") {
+      removeReadList(bookId);
+      setReadBooks(readBooks.filter((b) => b.bookId !== bookId));
+    } else {
+      removeWishList(bookId);
+      setWishList(wishList.filter((b) => b.bookId !== bookId));
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-5 p-5 border border-gray-100 rounded-xl bg-white hover:border-gray-200 hover:shadow-md transition-all duration-200">
       {/* Left: Image */}
       <div className="bg-gray-50 rounded-xl p-6 flex items-center justify-center min-w-48 shrink-0">
-        <img
-          src={image}
-          alt={bookName}
-          className="h-36 object-contain"
-        />
+        <img src={image} alt={bookName} className="h-36 object-contain" />
       </div>
 
       {/* Right: Content */}
       <div className="flex-1 space-y-3 min-w-0">
-        <div>
-          <h2 className="text-xl font-bold font-playfair-display text-content leading-snug">
-            {bookName}
-          </h2>
-          <p className="text-sm font-medium text-content/60 font-work-sans mt-1">
-            By {author}
-          </p>
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h2 className="text-xl font-bold font-playfair-display text-content leading-snug">
+              {bookName}
+            </h2>
+            <p className="text-sm font-medium text-content/60 font-work-sans mt-1">
+              By {author}
+            </p>
+          </div>
+          {/* Delete Button */}
+          <button
+            onClick={handleDelete}
+            aria-label="Remove book"
+            className="shrink-0 p-2 rounded-lg text-content/30 hover:text-red-500 hover:bg-red-50 transition-all duration-200 active:scale-90"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Tags and Year */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-content/40 uppercase tracking-wider">Tags</span>
+            <span className="text-xs font-bold text-content/40 uppercase tracking-wider">
+              Tags
+            </span>
             {tags.map((tag, i) => (
               <span
                 key={i}

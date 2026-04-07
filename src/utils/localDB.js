@@ -18,6 +18,11 @@ const addReadList = (book) => {
   localStorage.setItem("readList", JSON.stringify(allBooks));
 };
 
+const removeReadList = (bookId) => {
+  const allBooks = getReadList().filter((b) => b.bookId !== bookId);
+  localStorage.setItem("readList", JSON.stringify(allBooks));
+};
+
 const getWishList = () => {
   const wishList = localStorage.getItem("wishList");
 
@@ -38,4 +43,16 @@ const addWishList = (book) => {
   localStorage.setItem("wishList", JSON.stringify(allBooks));
 };
 
-export { getReadList, addReadList, getWishList, addWishList };
+const removeWishList = (bookId) => {
+  const allBooks = getWishList().filter((b) => b.bookId !== bookId);
+  localStorage.setItem("wishList", JSON.stringify(allBooks));
+};
+
+export {
+  getReadList,
+  addReadList,
+  removeReadList,
+  getWishList,
+  addWishList,
+  removeWishList,
+};
