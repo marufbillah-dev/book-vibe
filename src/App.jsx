@@ -5,7 +5,7 @@ import ListedBooks from "./pages/ListedBooks";
 import ContextProvider from "./context/ContextProvider";
 import PagesToRead from "./pages/pages-to-read/PagesToRead";
 import { ToastContainer } from "react-toastify";
-import ScrollToTop from "./hooks/ScrollToTop";
+import ScrollToTop from "./helper/ScrollToTop";
 import Footer from "./components/shared/Footer";
 import NotFound from "./pages/NotFound";
 
