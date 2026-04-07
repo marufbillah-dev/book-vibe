@@ -19,7 +19,8 @@ const ListedBooksContainer = () => {
   const { filteredWishList, setFilteredWishList } = useContext(BooksContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeTab = searchParams.get("tab") === "wish" ? "Wishlist" : "Read Books";
+  const activeTab =
+    searchParams.get("tab") === "wish" ? "Wishlist" : "Read Books";
   const [sortValue, setSortValue] = useState("default");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
