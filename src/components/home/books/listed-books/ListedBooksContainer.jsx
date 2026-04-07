@@ -4,6 +4,7 @@ import { BooksContext } from "../../../../context/BooksContext";
 import EmptyState from "./EmptyState";
 import { ChevronDown, Check } from "lucide-react";
 import { useSearchParams } from "react-router";
+import { removeReadList, removeWishList } from "../../../../utils/localDB";
 
 const SORT_OPTIONS = [
   { value: "default", label: "Default" },
@@ -13,7 +14,8 @@ const SORT_OPTIONS = [
 ];
 
 const ListedBooksContainer = () => {
-  const { readBooks, wishList } = useContext(BooksContext);
+  const { readBooks, setReadBooks, wishList, setWishList } =
+    useContext(BooksContext);
 
   const { filteredReadList, setFilteredReadList } = useContext(BooksContext);
   const { filteredWishList, setFilteredWishList } = useContext(BooksContext);
@@ -21,7 +23,12 @@ const ListedBooksContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab =
     searchParams.get("tab") === "wish" ? "Wishlist" : "Read Books";
-  const [sortValue, setSortValue] = useState("default");
+  const [sortValues, setSortValues] = useState({
+    read: "default",
+    wish: "default",
+  });
+  const currentTab = activeTab === "Read Books" ? "read" : "wish";
+  const sortValue = sortValues[currentTab];
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -37,13 +44,27 @@ const ListedBooksContainer = () => {
   }, []);
 
   const handleSortChange = (value) => {
-    setSortValue(value);
+    setSortValues((prev) => ({ ...prev, [currentTab]: value }));
     setDropdownOpen(false);
     const fakeEvent = { target: { value } };
     if (activeTab === "Read Books") {
       handleReadBooksSort(fakeEvent);
     } else {
       handleWishListSort(fakeEvent);
+    }
+  };
+
+  const handleDelete = (bookId, listType) => {
+    if (listType === "read") {
+      removeReadList(bookId);
+      const updated = readBooks.filter((b) => b.bookId !== bookId);
+      setReadBooks(updated);
+      setFilteredReadList((prev) => prev.filter((b) => b.bookId !== bookId));
+    } else {
+      removeWishList(bookId);
+      const updated = wishList.filter((b) => b.bookId !== bookId);
+      setWishList(updated);
+      setFilteredWishList((prev) => prev.filter((b) => b.bookId !== bookId));
     }
   };
 
@@ -196,6 +217,7 @@ const ListedBooksContainer = () => {
                         key={book.bookId}
                         book={book}
                         listType="read"
+                        onDelete={handleDelete}
                       />
                     ),
                   )
@@ -212,6 +234,7 @@ const ListedBooksContainer = () => {
                         key={book.bookId}
                         book={book}
                         listType="wish"
+                        onDelete={handleDelete}
                       />
                     ),
                   )

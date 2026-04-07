@@ -1,10 +1,7 @@
 import { MapPin, Users, FileText, Trash2 } from "lucide-react";
-import { useContext } from "react";
-import { BooksContext } from "../../../../context/BooksContext";
-import { removeReadList, removeWishList } from "../../../../utils/localDB";
 import { Link } from "react-router";
 
-const ListedBookCard = ({ book, listType }) => {
+const ListedBookCard = ({ book, listType, onDelete }) => {
   const {
     bookId,
     bookName,
@@ -17,19 +14,6 @@ const ListedBookCard = ({ book, listType }) => {
     category,
     tags,
   } = book;
-
-  const { readBooks, setReadBooks, wishList, setWishList } =
-    useContext(BooksContext);
-
-  const handleDelete = () => {
-    if (listType === "read") {
-      removeReadList(bookId);
-      setReadBooks(readBooks.filter((b) => b.bookId !== bookId));
-    } else {
-      removeWishList(bookId);
-      setWishList(wishList.filter((b) => b.bookId !== bookId));
-    }
-  };
 
   return (
     <div className="flex flex-col md:flex-row gap-5 p-5 border border-gray-100 rounded-xl bg-white hover:border-gray-200 hover:shadow-md transition-all duration-200">
@@ -51,7 +35,7 @@ const ListedBookCard = ({ book, listType }) => {
           </div>
           {/* Delete Button */}
           <button
-            onClick={handleDelete}
+            onClick={() => onDelete(bookId, listType)}
             aria-label="Remove book"
             className="shrink-0 p-2 rounded-lg text-content/30 hover:text-red-500 hover:bg-red-50 transition-all duration-200 active:scale-90"
           >
